@@ -48,16 +48,6 @@
       "HEAD"
     ]
   },
-  "": {
-    "name": null,
-    "domain": null,
-    "action": "Closure",
-    "uri": "guest",
-    "method": [
-      "GET",
-      "HEAD"
-    ]
-  },
   "larecipe.search": {
     "name": "larecipe.search",
     "domain": null,
@@ -246,6 +236,16 @@
     "domain": null,
     "action": "Laravel\\Dusk\\Http\\Controllers\\UserController@user",
     "uri": "_dusk/user/{guard?}",
+    "method": [
+      "GET",
+      "HEAD"
+    ]
+  },
+  "": {
+    "name": null,
+    "domain": null,
+    "action": "Closure",
+    "uri": "guest",
     "method": [
       "GET",
       "HEAD"
@@ -997,54 +997,6 @@
       "DELETE"
     ]
   },
-  "admin.kanbans.index": {
-    "name": "admin.kanbans.index",
-    "domain": null,
-    "action": "App\\Http\\Controllers\\Api\\V1\\Admin\\KanbansApiController@index",
-    "uri": "api/v1/kanbans",
-    "method": [
-      "GET",
-      "HEAD"
-    ]
-  },
-  "admin.kanbans.store": {
-    "name": "admin.kanbans.store",
-    "domain": null,
-    "action": "App\\Http\\Controllers\\Api\\V1\\Admin\\KanbansApiController@store",
-    "uri": "api/v1/kanbans",
-    "method": [
-      "POST"
-    ]
-  },
-  "admin.kanbans.show": {
-    "name": "admin.kanbans.show",
-    "domain": null,
-    "action": "App\\Http\\Controllers\\Api\\V1\\Admin\\KanbansApiController@show",
-    "uri": "api/v1/kanbans/{kanban}",
-    "method": [
-      "GET",
-      "HEAD"
-    ]
-  },
-  "admin.kanbans.update": {
-    "name": "admin.kanbans.update",
-    "domain": null,
-    "action": "App\\Http\\Controllers\\Api\\V1\\Admin\\KanbansApiController@update",
-    "uri": "api/v1/kanbans/{kanban}",
-    "method": [
-      "PUT",
-      "PATCH"
-    ]
-  },
-  "admin.kanbans.destroy": {
-    "name": "admin.kanbans.destroy",
-    "domain": null,
-    "action": "App\\Http\\Controllers\\Api\\V1\\Admin\\KanbansApiController@destroy",
-    "uri": "api/v1/kanbans/{kanban}",
-    "method": [
-      "DELETE"
-    ]
-  },
   "features": {
     "name": "features",
     "domain": null,
@@ -1160,15 +1112,6 @@
     "method": [
       "GET",
       "HEAD"
-    ]
-  },
-  "kanbanItemCommentController.react": {
-    "name": "kanbanItemCommentController.react",
-    "domain": null,
-    "action": "App\\Http\\Controllers\\KanbanItemCommentController@reaction",
-    "uri": "kanbanItemComments/{kanbanItemComment}/react",
-    "method": [
-      "POST"
     ]
   },
   "kanbanItemComment.index": {
@@ -2951,15 +2894,6 @@
       "DELETE"
     ]
   },
-  "kanbanItems.react": {
-    "name": "kanbanItems.react",
-    "domain": null,
-    "action": "App\\Http\\Controllers\\KanbanItemController@reaction",
-    "uri": "kanbanItems/{kanbanItem}/react",
-    "method": [
-      "POST"
-    ]
-  },
   "kanbanItems.sync": {
     "name": "kanbanItems.sync",
     "domain": null,
@@ -3741,74 +3675,6 @@
     "domain": null,
     "action": "App\\Http\\Controllers\\LogbookEntryController@destroy",
     "uri": "logbookEntries/{logbookEntry}",
-    "method": [
-      "DELETE"
-    ]
-  },
-  "maps.index": {
-    "name": "maps.index",
-    "domain": null,
-    "action": "App\\Http\\Controllers\\MapController@index",
-    "uri": "maps",
-    "method": [
-      "GET",
-      "HEAD"
-    ]
-  },
-  "maps.create": {
-    "name": "maps.create",
-    "domain": null,
-    "action": "App\\Http\\Controllers\\MapController@create",
-    "uri": "maps/create",
-    "method": [
-      "GET",
-      "HEAD"
-    ]
-  },
-  "maps.store": {
-    "name": "maps.store",
-    "domain": null,
-    "action": "App\\Http\\Controllers\\MapController@store",
-    "uri": "maps",
-    "method": [
-      "POST"
-    ]
-  },
-  "maps.show": {
-    "name": "maps.show",
-    "domain": null,
-    "action": "App\\Http\\Controllers\\MapController@show",
-    "uri": "maps/{map}",
-    "method": [
-      "GET",
-      "HEAD"
-    ]
-  },
-  "maps.edit": {
-    "name": "maps.edit",
-    "domain": null,
-    "action": "App\\Http\\Controllers\\MapController@edit",
-    "uri": "maps/{map}/edit",
-    "method": [
-      "GET",
-      "HEAD"
-    ]
-  },
-  "maps.update": {
-    "name": "maps.update",
-    "domain": null,
-    "action": "App\\Http\\Controllers\\MapController@update",
-    "uri": "maps/{map}",
-    "method": [
-      "PUT",
-      "PATCH"
-    ]
-  },
-  "maps.destroy": {
-    "name": "maps.destroy",
-    "domain": null,
-    "action": "App\\Http\\Controllers\\MapController@destroy",
-    "uri": "maps/{map}",
     "method": [
       "DELETE"
     ]
