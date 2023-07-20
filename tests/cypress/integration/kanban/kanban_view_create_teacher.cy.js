@@ -26,9 +26,9 @@ describe('kanban tests (teacher role)', () => {
               .get('a[id="add-kanban"]')
               .click();
 
-            cy.get('div[class="vue-swatches"]')
+            cy.get('div[class="vue-swatches__trigger__wrapper"]')
               .click()
-              .get('div[aria-label="#3398DB"]')
+              .get('div[aria-label="#2ECC70"]')
               .click()
 
               .get('input[id="title"]')
@@ -49,89 +49,43 @@ describe('kanban tests (teacher role)', () => {
 
         it('add new kanban status1', () => {
             cy.visit('/kanbans/'+ parent.modelId)
-                .get('div[id="kanbanStatusCreate"]')
+                .get('span[id^="kanbanStatusCreate"]')
                 .click()
 
-                .get('button[name="kanbanStatusCancel"]')
-                .click()
+                // .get('button[name="kanbanStatusCancel"]') // INFO: no cancel button in KanbanStatus.vue
+                // .click()
 
-                .get('div[id="kanbanStatusCreate"]')
-                .click()
+                // .get('span[id^="kanbanStatusCreate"]')
+                // .click()
 
-                .get('input[id="title"]')
+                .get('input[id^="title"]')
                 .type('Status 1')
                 .should('have.value', 'Status 1')
 
-                .get('button[name="kanbanStatusSave"]')
+                .get('button[name^="kanbanStatusSave"]')
                 .click();
         });
 
         it('add new kanban status2', () => {
             cy.visit('/kanbans/'+ parent.modelId)
-                .get('div[id="kanbanStatusCreate"]')
+                .get('span[id^="kanbanStatusCreate"]')
                 .click()
 
-                .get('button[name="kanbanStatusCancel"]')
-                .click()
+                // .get('button[name="kanbanStatusCancel"]')
+                // .click()
 
-                .get('div[id="kanbanStatusCreate"]')
-                .click()
+                // .get('span[id^="kanbanStatusCreate"]')
+                // .click()
 
-                .get('input[id="title"]')
+                .get('input[id^="title"]')
                 .type('Status 2')
                 .should('have.value', 'Status 2')
 
-                .get('button[name="kanbanStatusSave"]')
+                .get('button[name^="kanbanStatusSave"]')
                 .click();
         });
 
-        it('add new kanban item1', () => {
-            cy.visit('/kanbans/'+ parent.modelId)
-                .get('div[id="kanbanItemCreateButton_1"]')
-                .click()
-
-                .get('div[id="kanbanItemCreate_1"] div[class="vue-swatches"]')
-                .click()
-                .get('div[id="kanbanItemCreate_1"] div[aria-label="#3398DB"]')
-                .click()
-
-                .get('div[id="kanbanItemCreate_1"] input[id="title"]')
-                .type('Item 1')
-                .should('have.value', 'Item 1');
-
-            cy.window()
-                .then(win => {
-                    win.tinymce.activeEditor.setContent("<p>Item 1 description</p>");
-                });
-
-            cy.get('div[id="kanbanItemCreate_1"] button[name="kanbanItemSave"]')
-                .click();
-        });
-
-        it('add new kanban item1', () => {
-            cy.visit('/kanbans/'+ parent.modelId)
-                .get('div[id="kanbanItemCreateButton_1"]')
-                .click()
-
-                .get('div[id="kanbanItemCreate_1"] div[class="vue-swatches"]')
-                .click()
-                .get('div[id="kanbanItemCreate_1"] div[aria-label="#3398DB"]')
-                .click()
-
-                .get('div[id="kanbanItemCreate_1"] input[id="title"]')
-                .type('Item 1')
-                .should('have.value', 'Item 1');
-
-            cy.window()
-                .then(win => {
-                    win.tinymce.activeEditor.setContent("<p>Item 1 description</p>");
-                });
-
-            cy.get('div[id="kanbanItemCreate_1"] button[name="kanbanItemSave"]')
-                .click();
-        });
-
-        it('add new kanban item2', () => {
+        it('add new kanban item on first status', () => {
             cy.visit('/kanbans/'+ parent.modelId)
                 .get('div[id="kanbanItemCreateButton_0"]')
                 .click()
@@ -142,19 +96,65 @@ describe('kanban tests (teacher role)', () => {
                 .click()
 
                 .get('div[id="kanbanItemCreate_0"] input[id="title"]')
-                .type('Item 2')
-                .should('have.value', 'Item 2');
+                .type('Item 1')
+                .should('have.value', 'Item 1');
 
             cy.window()
                 .then(win => {
-                    win.tinymce.activeEditor.setContent("<p>Item 2 description</p>");
+                    win.tinymce.activeEditor.setContent("<p>First Status, Item 1 description</p>");
                 });
 
             cy.get('div[id="kanbanItemCreate_0"] button[name="kanbanItemSave"]')
                 .click();
         });
 
-        it('edit new kanban item2', () => {
+        it('add new kanban item on second status', () => {
+            cy.visit('/kanbans/'+ parent.modelId)
+                .get('div[id="kanbanItemCreateButton_1"]')
+                .click()
+
+                .get('div[id="kanbanItemCreate_1"] div[class="vue-swatches"]')
+                .click()
+                .get('div[id="kanbanItemCreate_1"] div[aria-label="#3398DB"]')
+                .click()
+
+                .get('div[id="kanbanItemCreate_1"] input[id="title"]')
+                .type('Item 1')
+                .should('have.value', 'Item 1');
+
+            cy.window()
+                .then(win => {
+                    win.tinymce.activeEditor.setContent("<p>Second Status, Item 1 description</p>");
+                });
+
+            cy.get('div[id="kanbanItemCreate_1"] button[name="kanbanItemSave"]')
+                .click();
+        });
+
+        it('add new kanban item on second status', () => {
+            cy.visit('/kanbans/'+ parent.modelId)
+                .get('div[id="kanbanItemCreateButton_1"]')
+                .click()
+
+                .get('div[id="kanbanItemCreate_1"] div[class="vue-swatches"]')
+                .click()
+                .get('div[id="kanbanItemCreate_1"] div[aria-label="#3398DB"]')
+                .click()
+
+                .get('div[id="kanbanItemCreate_1"] input[id="title"]')
+                .type('Item 2')
+                .should('have.value', 'Item 2');
+
+            cy.window()
+                .then(win => {
+                    win.tinymce.activeEditor.setContent("<p>Second Status, Item 2 description</p>");
+                });
+
+            cy.get('div[id="kanbanItemCreate_1"] button[name="kanbanItemSave"]')
+                .click();
+        });
+
+        it('edit kanban item1 on first status', () => {
             cy.visit('/kanbans/'+ parent.modelId)
                 .get('div[id="kanbanItemDropdown_0_0"]')
                 .click()
@@ -162,11 +162,12 @@ describe('kanban tests (teacher role)', () => {
                 .click()
 
                 .get('input[id="title_0_0"]')
-                .type('Item 2-edit');
+                .type('Item 1-edit')
+                .should('have.value', 'Item 1-edit');
 
             cy.window()
                 .then(win => {
-                    win.tinymce.activeEditor.setContent("<p>Item 2 description - edit</p>");
+                    win.tinymce.activeEditor.setContent("<p>First Status, Item 1 description - edit</p>");
                 });
 
             cy.get('button[name="kanbanItemSave_0_0"]')
@@ -192,7 +193,7 @@ describe('kanban tests (teacher role)', () => {
                 .click();
         });
 
-        it('delete kanban item2', () => {
+        it('delete kanban item1 on first status', () => {
             cy.visit('/kanbans/'+ parent.modelId)
                 .get('div[id="kanbanItemDropdown_0_0"]')
                 .click()
@@ -200,21 +201,21 @@ describe('kanban tests (teacher role)', () => {
                 .click()
         });
 
-        it('delete new kanban status2', () => {
+        it('delete kanban status2', () => {
             cy.visit('/kanbans/'+ parent.modelId)
-                .get('div[id="kanbanStatusDropdown_1"]')
+                .get('div[id="kanbanStatusDropdown_2"]')
                 .click()
 
-                .get('div[id="kanbanStatusDropdown_1"] button[name="kanbanStatusDelete"]')
+                .get('div[id="kanbanStatusDropdown_2"] button[name="kanbanStatusDelete"]')
                 .click();
         });
 
         it('delete new kanban status1', () => {
             cy.visit('/kanbans/'+ parent.modelId)
-                .get('div[id="kanbanStatusDropdown_0"]')
+                .get('div[id="kanbanStatusDropdown_1"]')
                 .click()
 
-                .get('div[id="kanbanStatusDropdown_0"] button[name="kanbanStatusDelete"]')
+                .get('div[id="kanbanStatusDropdown_1"] button[name="kanbanStatusDelete"]')
                 .click();
         });
 
