@@ -210,7 +210,7 @@ class KanbanController extends Controller
         $kanban->subscriptions()->delete();
 
         if ($kanban->delete()) {
-            return $this->list();
+            return $this->list(new Request());
         }
     }
 
