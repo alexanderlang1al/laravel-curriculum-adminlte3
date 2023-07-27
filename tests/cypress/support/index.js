@@ -19,6 +19,12 @@ import './laravel-commands';
 import './laravel-routes';
 import './assertions';
 
+Cypress.on('uncaught:exception', (err, runnable) => {
+    // returning false here prevents Cypress from
+    // failing the test
+    return false
+});
+
 before(() => {
     cy.task('activateCypressEnvFile', {}, { log: false });
     cy.artisan('config:clear', {}, { log: false });

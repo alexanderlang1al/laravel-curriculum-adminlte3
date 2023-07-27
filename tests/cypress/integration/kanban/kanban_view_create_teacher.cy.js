@@ -131,7 +131,7 @@ describe('kanban tests (teacher role)', () => {
                 .click();
         });
 
-        it('add new kanban item on second status', () => {
+        it('add new kanban item on second status with due-date', () => {
             cy.visit('/kanbans/'+ parent.modelId)
                 .get('div[id="kanbanItemCreateButton_1"]')
                 .click()
@@ -150,7 +150,10 @@ describe('kanban tests (teacher role)', () => {
                     win.tinymce.activeEditor.setContent("<p>Second Status, Item 2 description</p>");
                 });
 
-            cy.get('div[id="kanbanItemCreate_1"] button[name="kanbanItemSave"]')
+            cy.get('div[id="kanbanItemCreate_1"] input[name="date"]')
+                .type('2030-01-01 00:00:00')
+
+                .get('div[id="kanbanItemCreate_1"] button[name="kanbanItemSave"]')
                 .click();
         });
 
@@ -162,19 +165,26 @@ describe('kanban tests (teacher role)', () => {
                 .click()
 
                 .get('input[id="title_0_0"]')
-                .type('Item 1-edit')
+                .type('-edit')
                 .should('have.value', 'Item 1-edit');
 
+            cy.wait(250); // INFO: sometimes it throws an error. because the tinymce isn't laoded yet
             cy.window()
                 .then(win => {
                     win.tinymce.activeEditor.setContent("<p>First Status, Item 1 description - edit</p>");
                 });
 
-            cy.get('button[name="kanbanItemSave_0_0"]')
-                .click();
+            cy.get('.mx-datepicker')
+                .type('2020-01-01 00:00:00')
+
+                .get('button[name="kanbanItemSave_0_0"]')
+                .click()
+
+                .get('.card')
+                .contains('Abgelaufen');
         });
 
-        it('add medium to kanban item2', () => {
+        it('add medium to kanban item2', () => { // INFO: give teacher access to 'medium/external_medium'-roles
             cy.visit('/kanbans/'+ parent.modelId)
                 .get('div[id="kanbanItemDropdown_0_0"]')
                 .click()
@@ -199,23 +209,25 @@ describe('kanban tests (teacher role)', () => {
                 .click()
                 .get('button[name="kanbanItemDelete_0_0"]')
                 .click()
+                .get('div[id="itemModal_0_0"] .btn-primary')
+                .click();
         });
 
         it('delete kanban status2', () => {
             cy.visit('/kanbans/'+ parent.modelId)
-                .get('div[id="kanbanStatusDropdown_2"]')
+                .get('.kanban-header').eq(0).find('div[id^="kanbanStatusDropdown"]')
                 .click()
 
-                .get('div[id="kanbanStatusDropdown_2"] button[name="kanbanStatusDelete"]')
+                .get('.kanban-header').eq(0).find('button[name="kanbanStatusDelete"]')
                 .click();
         });
 
-        it('delete new kanban status1', () => {
+        it('delete kanban status1', () => {
             cy.visit('/kanbans/'+ parent.modelId)
-                .get('div[id="kanbanStatusDropdown_1"]')
+                .get('.kanban-header').eq(1).find('div[id^="kanbanStatusDropdown"]')
                 .click()
 
-                .get('div[id="kanbanStatusDropdown_1"] button[name="kanbanStatusDelete"]')
+                .get('.kanban-header').eq(1).find('button[name="kanbanStatusDelete"]')
                 .click();
         });
 
@@ -228,6 +240,8 @@ describe('kanban tests (teacher role)', () => {
         it('delete kanban', () => {
             cy.visit('/kanbans')
               .get('button[id="delete-kanban-' + parent.modelId + '"]')
+              .click()
+              .get('div[id="kanbanModal"] .btn-primary')
               .click();
         });
     });
