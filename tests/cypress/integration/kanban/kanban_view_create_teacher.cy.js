@@ -213,21 +213,27 @@ describe('kanban tests (teacher role)', () => {
                 .click();
         });
 
-        it('delete kanban status2', () => {
+        it('delete kanban status1', () => {
             cy.visit('/kanbans/'+ parent.modelId)
-                .get('.kanban-header').eq(0).find('div[id^="kanbanStatusDropdown"]')
+                .get('.kanban-header div[id^="kanbanStatusDropdown"]').eq(0)
                 .click()
 
-                .get('.kanban-header').eq(0).find('button[name="kanbanStatusDelete"]')
+                .get('.kanban-header button[name="kanbanStatusDelete"]').eq(0)
+                .click()
+                
+                .get('div[id^="statusModal"] .btn-primary').eq(0)
                 .click();
         });
 
-        it('delete kanban status1', () => {
+        it('delete kanban status2', () => {
             cy.visit('/kanbans/'+ parent.modelId)
-                .get('.kanban-header').eq(1).find('div[id^="kanbanStatusDropdown"]')
+                .get('.kanban-header div[id^="kanbanStatusDropdown"]')
                 .click()
 
-                .get('.kanban-header').eq(1).find('button[name="kanbanStatusDelete"]')
+                .get('.kanban-header button[name="kanbanStatusDelete"]')
+                .click()
+
+                .get('div[id^="statusModal"] .btn-primary').eq(0)
                 .click();
         });
 
@@ -239,10 +245,11 @@ describe('kanban tests (teacher role)', () => {
 
         it('delete kanban', () => {
             cy.visit('/kanbans')
-              .get('button[id="delete-kanban-' + parent.modelId + '"]')
-              .click()
-              .get('div[id="kanbanModal"] .btn-primary')
-              .click();
+                .get('button[id="delete-kanban-' + parent.modelId + '"]')
+                .click()
+
+                .get('div[id="kanbanModal"] .btn-primary')
+                .click();
         });
     });
 });
