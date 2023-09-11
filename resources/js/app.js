@@ -41,6 +41,30 @@ Vue.prototype.trans = (key) => {
 
 import "vue-swatches/dist/vue-swatches.css";
 
+
+Vue.prototype.$textcolor = (color) => {
+    if (typeof(color) != 'string'){
+        color = 'ffffff';
+    }
+
+    color = (color.charAt(0) === '#') ? color.substring(1, 7) : color;
+    //console.log(color);
+    var r = parseInt(color.substring(0, 2), 16); // hexToR
+    var g = parseInt(color.substring(2, 4), 16); // hexToG
+    var b = parseInt(color.substring(4, 6), 16); // hexToB
+    //console.log(r + ' ' + g + ' ' + b);
+    if (((r * 0.299) + (g * 0.587) + (b * 0.114)) > 140)
+    {
+        //console.log('black');
+        return '#000';
+
+    } else {
+        //console.log('white');
+        return '#fff';
+    }
+};
+
+
 /**
  * Store current ab in browser storage
  * example @click="setLocalStorage('#logbook_'+entry.id, '#logbook_description_'+entry.id)"
@@ -153,6 +177,7 @@ Vue.component('objective-progress-subscription-modal', () => import('./component
 Vue.component('task-modal', () => import('./components/tasks/TaskModal.vue'));
 Vue.component('task', () => import('./components/tasks/Task.vue'));
 Vue.component('task-timeline', () => import('./components/tasks/Timeline.vue'));
+Vue.component('training', () => import('./components/training/Training'));
 Vue.component('kanbans', () => import('./components/kanban/Kanbans.vue'));
 Vue.component('kanban-board', () => import('./components/kanban/KanbanBoard.vue'));
 Vue.component('subscribe-modal', () => import('./components/subscription/SubscribeModal.vue'));

@@ -7,12 +7,13 @@
 <!-- Site wrapper -->
 <div id="app" class="wrapper">
     <!-- Navbar -->
-    <nav class="main-header navbar navbar-expand navbar-lime navbar-light">
+    <nav class="main-header navbar navbar-expand navbar-lime navbar-light user-select-none">
         <!-- Left navbar links -->
         <ul class="navbar-nav">
             <li class="nav-item">
                 <a class="nav-link"
                    data-widget="pushmenu"
+                   href="#"
                    onclick="toggleMenu()">
                     <i class="fas fa-bars"></i>
                 </a>
@@ -35,7 +36,7 @@
                 </form>-->
 
                 <!-- Right navbar links -->
-        <ul class="navbar-nav ml-auto">
+        <ul class="navbar-nav pl-2 mr-auto">
             <searchbar></searchbar>
         </ul>
         @include('partials.navbar')
@@ -66,7 +67,7 @@
         <!-- Main content -->
         <section class="content d-flex flex-column flex-fill">
             @yield('content')
-<!--            <input id="medium_id" class="invisible">-->
+            <input id="medium_id" class="invisible"> <!-- DONT REMOVE - used by TINYMCE -->
         </section>
         <!-- /.content -->
     </div>

@@ -23,6 +23,8 @@ Route::group(['middleware' => 'auth'], function () {
 
     Route::get('/admin', 'AdminController@index')->name('admin.index');
 
+    Route::resource('calendarEvents', 'CalendarEventController');
+
     Route::post('kanbanItemComments/{kanbanItemComment}/react', 'KanbanItemCommentController@reaction')->name('kanbanItemCommentController.react');
     Route::resource('kanbanItemComment', 'KanbanItemCommentController');
 
@@ -99,6 +101,9 @@ Route::group(['middleware' => 'auth'], function () {
     Route::post('eventSubscriptions/search', 'EventSubscriptionController@search')->name('eventSubscriptions.search');
     Route::post('eventSubscriptions/getEvents', 'EventSubscriptionController@getEvents')->name('eventSubscriptions.getEvents');
 
+    Route::resource('exercises', 'ExerciseController');
+    Route::resource('exerciseDones', 'ExerciseDoneController');
+
     Route::resource('eventSubscriptions', 'EventSubscriptionController');
 
     Route::resource('glossar', 'GlossarController');
@@ -119,6 +124,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::resource('groups', 'GroupsController');
 
     Route::get('kanbans/list', 'KanbanController@list');
+    Route::get('kanbans/{kanban}/copy', 'KanbanController@copyKanban');
     Route::get('export_csv/{kanban}', 'KanbanController@exportKanbanCsv');
     Route::get('export_pdf/{kanban}', 'KanbanController@exportKanbanPdf');
     Route::resource('kanbans', 'KanbanController');
@@ -235,6 +241,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::resource('plans', 'PlanController');
 
     Route::resource('planSubscriptions', 'PlanSubscriptionController');
+    Route::resource('planEntries', 'PlanEntryController');
 
     Route::resource('prerequisites', 'PrerequisitesController');
 
@@ -279,6 +286,9 @@ Route::group(['middleware' => 'auth'], function () {
     /* terminalObjectiveSubscriptions */
     Route::post('terminalObjectiveSubscriptions/destroy', 'TerminalObjectiveSubscriptionsController@destroySubscription');
     Route::resource('terminalObjectiveSubscriptions', 'TerminalObjectiveSubscriptionsController');
+
+    Route::resource('trainings', 'TrainingController');
+    Route::resource('trainingSubscriptions', 'TrainingSubscriptionController');
 
     /* reference(Subscription)  */
     Route::resource('references', 'ReferenceController');
