@@ -26,6 +26,8 @@ describe('kanban tests (teacher role)', () => {
               .get('a[id="add-kanban"]')
               .click();
 
+            cy.url().should('include', '/kanbans/create');
+
             cy.get('div[class="vue-swatches__trigger__wrapper"]')
               .click()
               .get('div[aria-label="#2ECC70"]')
@@ -39,12 +41,19 @@ describe('kanban tests (teacher role)', () => {
               .then(win => {
               win.tinymce.activeEditor.setContent("<p>" + description + "</p>");
             });
+
             cy.get('input[id="kanban-save"]')
               .click();
+
             cy.url().then((url) => {
-              var parts = url.split('/');
-              parent.modelId = parts.pop() || parts.pop();  // get modelId
+              const parts = url.split('/');
+              parent.modelId = parts.pop(); // get modelId
             });
+
+            cy.visit('/kanbans')
+                .get('div[model-url="kanbans"]')
+                .should('include.text', title)
+                .should('include.text', description);
         });
 
         it('add new kanban status1', () => {
