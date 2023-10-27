@@ -3,8 +3,11 @@
 namespace App\Http\Controllers\Api\V1\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Controllers\VideoconferenceController;
 use App\Notifications\Welcome;
+use App\Organization;
 use App\User;
+use App\Videoconference;
 
 class UsersApiController extends Controller
 {
@@ -107,7 +110,11 @@ class UsersApiController extends Controller
             1, //optional event ID
         ];
 
-        return ['enrollments' => $user->currentGroups()->with(['curricula'])->get(), //todo: select only used fields of curricula
+        return ['enrollments' => $user->currentGroups()
+                                      ->select('groups.id', 'groups.title')
+                                      ->with(['curricula'=> function ($query) {
+                                            $query->select('curricula.id', 'curricula.title');
+                                       }])->get(),
             'notifications' => $user->notifications,
             'events' => [/*$event*/],
         ];
