@@ -548,7 +548,7 @@ export default {
             this.autoRefresh = false;
         }
 
-        document.getElementById('searchbar').classList.remove('d-none');
+        this.$eventHub.$emit('showSearchbar');
     },
     computed: {
         textColor: function(){
@@ -607,6 +607,15 @@ export default {
     width: 100%;
     padding: 2rem;
     overflow:auto;
+}
+#fullscreen {
+    float: left;
+    padding: 0px 5px;
+    margin-top: -25px;
+    margin-left: -25px;
+}
+#fullscreen:hover {
+    cursor: pointer;
 }
 @media (max-width: 991px) {
     .kanban_board_container { width: calc(100vw - 30px) !important; }
